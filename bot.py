@@ -19,7 +19,7 @@ class TweetListener(StreamingClient):
             # if rate_limit_retry is True then in the event that you are being rate 
             # limited by Discord your webhook will automatically be sent once the 
             # rate limit has been lifted
-            webhook = DiscordWebhook(url='https://discord.com/api/webhooks/1062004969902964736/URL', rate_limit_retry=True)
+            webhook = DiscordWebhook(url='https://discord.com/api/webhooks/URL', rate_limit_retry=True)
             embed = DiscordEmbed(
                 title="New Post", color=('00ff00' if contains else 'ff0000')
             )
@@ -32,7 +32,7 @@ class TweetListener(StreamingClient):
             webhook.add_embed(embed)
             response = webhook.execute()
         except Exception as e:
-            webhook = DiscordWebhook(url='https://discord.com/api/webhooks/1062004969902964736/URL', rate_limit_retry=True,
+            webhook = DiscordWebhook(url='https://discord.com/api/webhooks/URL', rate_limit_retry=True,
                                      content=f'an error occured, {e}', allowed_mentions={"parse": []})
             response = webhook.execute()
         return True
@@ -44,7 +44,7 @@ class TweetListener(StreamingClient):
         print(status_code)
 
 if __name__ == '__main__':
-    webhook = DiscordWebhook(url='https://discord.com/api/webhooks/1062004969902964736/URL', rate_limit_retry=True,
+    webhook = DiscordWebhook(url='https://discord.com/api/webhooks/URL', rate_limit_retry=True,
                             content=f'bot started listening to {username}', allowed_mentions={"parse": []})
     response = webhook.execute()
     listen = TweetListener("TOKEN")
