@@ -2,7 +2,6 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 
 import requests, re, json, urllib, time
 from datetime import datetime
-from pprint import pprint
 
 def parse_content(d):
     text = d["content"]["tweet"]["full_text"]
@@ -59,12 +58,13 @@ if __name__ == '__main__':
                     # rate limit has been lifted
                     webhook = DiscordWebhook(url='https://discord.com/api/webhooks/URL', rate_limit_retry=True)
                     embed = DiscordEmbed(
-                        title="New Post", color=('00ff00' if contains else 'ff0000'), timestamp=dt
+                        title="New Post", color=('00ff00' if contains else 'ff0000')
                     )
                     embed.add_embed_field(name="User", value=username, inline=False)
                     embed.add_embed_field(name="Tweet ID", value=tweet_id, inline=False)
                     embed.add_embed_field(name="Text", value=text, inline=False)
                     embed.add_embed_field(name="Clementi Avenue 6", value=str(contains), inline=False)
+                    embed.set_timestamp(dt.timestamp)
                     
                     webhook.add_embed(embed)
                     response = webhook.execute()
@@ -72,3 +72,4 @@ if __name__ == '__main__':
                     webhook = DiscordWebhook(url='https://discord.com/api/webhooks/URL', rate_limit_retry=True,
                                              content=f'an error occured, {e}', allowed_mentions={"parse": []})
                     response = webhook.execute()
+                    raise e
