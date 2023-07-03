@@ -10,7 +10,7 @@ def parse_content(d):
     user = "@"+d["content"]["tweet"]["user"]["name"]
     dt = datetime.strptime(d["content"]["tweet"]["created_at"],
                              "%a %b %d %X %z %Y")
-    return {"id": tweet_id, "text": text, "user": user, "timestamp": dt}
+    return {"id": tweet_id, "text": text, "user": user, "timestamp": dt.isoformat()}
 
 if __name__ == '__main__':
     USERNAME = "LTAtrafficnews"
@@ -52,7 +52,7 @@ if __name__ == '__main__':
                     username = data['user']
                     tweet_id = data['id']
                     text = data['text']
-                    dt = data["timestamp"]
+                    dt = data["timestamp"].fromisoformat()
                     contains = ("Clementi Ave 6" in text) or ("Clementi Avenue 6" in text)
                     # if rate_limit_retry is True then in the event that you are being rate 
                     # limited by Discord your webhook will automatically be sent once the 
