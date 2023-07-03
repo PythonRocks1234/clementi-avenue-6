@@ -64,7 +64,7 @@ if __name__ == '__main__':
                     embed.add_embed_field(name="Tweet ID", value=tweet_id, inline=False)
                     embed.add_embed_field(name="Text", value=text, inline=False)
                     embed.add_embed_field(name="Clementi Avenue 6", value=str(contains), inline=False)
-                    embed.set_timestamp(dt.timestamp)
+                    embed.set_timestamp(dt.timestamp())
                     
                     webhook.add_embed(embed)
                     response = webhook.execute()
