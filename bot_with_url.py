@@ -52,7 +52,7 @@ if __name__ == '__main__':
                     username = data['user']
                     tweet_id = data['id']
                     text = data['text']
-                    dt = data["timestamp"].fromisoformat()
+                    dt = datetime.fromisoformat(data["timestamp"])
                     contains = ("Clementi Ave 6" in text) or ("Clementi Avenue 6" in text)
                     # if rate_limit_retry is True then in the event that you are being rate 
                     # limited by Discord your webhook will automatically be sent once the 
